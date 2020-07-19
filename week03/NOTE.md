@@ -66,7 +66,7 @@ Execution Context Stack 里每一个所保存的东西 执行上下文(Execution
 LexicalEnvironment 保存了 this、new.target、super、变量
 VariableEnvironment 是历史遗留包袱，仅仅由来处理 var 声明
 
-**Environment Records**
+**Environment Records** 
 
 * **Declarative Environment Records**
   * **Function Environment Records**
