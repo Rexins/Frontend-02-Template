@@ -20,6 +20,12 @@ Types（基本类型）
   * OctalIntegerLiteral（八进制）0o10
   * HexIntegerLiteral（十六进制）0xFF
 
+根据浮点数的定义，非整数的 Number 类型无法用 == (===) 来比较，这也是为什么 JavaScript 中，0.1+0.2不能=3;
+在实际上我们应该拿其和最小精度值作比较:
+```
+  Math.abs(0.1+0.2-0.3) <= Number.EPSILON
+```
+
 ### String
 
     字符串由多个 字符（Character）组成，在计算机当中用 码点（Code Point） 来表示字符，在存储当中按编码方式（Encoding）以字节存储。
@@ -47,13 +53,19 @@ UTF-8 的编码规则很简单，只有二条：
 2. 对于 n 字节的符号（n>1），第一个字节的前 n 位都设为 1，第 n + 1 位设为 0，后面字节前两位律设为 10（所提及的都是控制位），剩下没有提及的二进制码，全部为这个符号的 Unicode 码。
 
 ### Null、Undefined
+  Null 表示的定位了为空，null 是一个关键字
+  Undefined 表示没有定义为空，undefined 为一个变量，在 JavaScript 早期的时候可以对其赋值，所以通常用 void 关键字来表示 undefined
 
-    Null 表示的定位了为空，null 是一个关键字
-    Undefined 表示没有定义为空，undefined 为一个变量，在 JavaScript 早期的时候可以对其赋值，所以通常用 void 关键字来表示 undefined
+### Symbol
+  Symbol 是 ES6 中引入的新类型，它是一切非字符串对象 key 的集合，在 ES6 规范中，整个对象系统被用 Symbol 重构。
+  一些标准中提到的 Symbol，可以在全局 Symbol 函数的属性中找到。例如，我们可以使用 Symbol.iterator 来定义 for...of 在对象上的行为。
+  这些标准中被称为“众所周知”的Symbol，也构成了语言的一类接口类型。它们允许编写和语言结合更紧密的API。
 
 ### Object
+  首先从最初认知角度上来定义 Object，他其实有三个特征 唯一标识符(identifier)、状态(state)、行为(behaior)。
+  JavaScript对象独有的特色：**对象具有高度的动态性，这是因为 JavaScript 赋予了使用者在运行时为对象填改状态和行为的能力。**
 
-    首先从最初认知角度上来定义 Object，他其实有三个特征 唯一标识符(identifier)、状态(state)、行为(behaior)。
+  JavaScript 对于 **基于对象** 的定义：**语言和宿主的基础设施由对象来提供，并且 JavaScript 程序即是一系列互相通讯的对象集合。**
 
 * Class
   * 类是一种常见的描述对象的方式
@@ -69,11 +81,11 @@ UTF-8 的编码规则很简单，只有二条：
 * 原型
   * 定义了属性的访问，对象属性进行访问是贤惠查找对象中是否存在，然后顺着私有属性 [[prototype]] 向上查找，直到其  [[prototype]] 为 null。
   * 顺着[[prototype]]的链式查找则被称为原型链
-* 属性(k 值可以为两种类型，String/Symbol)
+* 属性(k 值可以为两种类型 String/Symbol，用一组特征来访问属性)
   * 数据属性(Data Property)
-    * value、writable、enumerable、configurable
+    * value(值)、writable(能否被赋值)、enumerable(能否枚举)、configurable(能否被删除或改变特征值)
   * 访问器属性(Accessor Property)
-    * get、set、enumerable、configurable
+    * get(取属性值被调用)、set(设置属性值被调用)、enumerable、configurable
 
 #### 描述面向对象的语法
 
@@ -92,3 +104,13 @@ UTF-8 的编码规则很简单，只有二条：
 #### 宿主对象
 
     宿主对象由宿主环境提供
+
+
+### 标准/规范类型
+* **List 和 Record**：用于描述函数传参过程。
+* **Set**：主要用于解释字符集等。
+* **Completion Record**：用于描述异常、跳出等语句执行过程。
+* **Reference**：用来描述对象属性、assign、delete 等。
+* **Property Description**：用于描述对象的属性。
+* **Lexical Environment 和 Environment Record**：用于描述变量和作用域。
+* **Data Block**：用于描述二进制数据。

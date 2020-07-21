@@ -19,9 +19,10 @@ function utf8_Encoding2(text) {
             bytes.push(c.charCodeAt(0))
         }
     }
-    console.log(bytes)
     return new Uint8Array(bytes)
 }
+
+
 
 function utf8_Encoding3(text) {
     const bytes = []
@@ -33,7 +34,7 @@ function utf8_Encoding3(text) {
         } else if (code >= 0x000080 && code <= 0x0007FF) {
             bytes.push('110' + strCode.slice(0, -6).padStart(5, '0'))
             bytes.push('10' + strCode.slice(-6))
-        } else if (code >= 0x000800 && code <= 0xFFFF) {
+        } else if (code >= 0x000800 && code <= 0x00FFFF) {
             bytes.push('1110' + strCode.slice(0, -12).padStart(4, '0'))
             bytes.push('10' + strCode.slice(-12, -6))
             bytes.push('10' + strCode.slice(-6))

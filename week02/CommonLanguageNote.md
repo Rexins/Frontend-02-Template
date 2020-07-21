@@ -53,22 +53,22 @@
 
 ### 一般命令式语言的设计方式
 
-* Atom
-  * Identifier
-  * Literal
-* Expression
-  * Atom
-  * Operator
-  * Punctuator
-* Statement
-  * Expression
-  * Keyword
-  * Punctuator
-* Structor
-  * Function
-  * Class
-  * Process
-  * Namespace
+* Atom(原子)
+  * Identifier(标识符)
+  * Literal(直面量)
+* Expression(表达式)
+  * Atom(原子)
+  * Operator(操作符)
+  * Punctuator(辅助符号)
+* Statement(语法)
+  * Expression(表达式)
+  * Keyword(关键字)
+  * Punctuator(辅助符号)
+* Structor(结构化)
+  * Function(函数)
+  * Class(类)
+  * Process(进程)
+  * Namespace(命名空间)
   * …
 * Program
   * Program
@@ -76,4 +76,3 @@
   * Package
   * Library
 
-## JS类型
