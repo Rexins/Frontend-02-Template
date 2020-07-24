@@ -53,7 +53,7 @@ getCode => execute => wait => getCode ...
 宏任务与微任务会决定我们代码的执行顺序，在同一个任务里还会有函数调用导致任务来来回回的执行，主要是涉及的执行上下文栈(Execution Context Stack)。
 Execution Context Stack 里每一个所保存的东西 执行上下文(Execution Context),Execution Context 保存了执行语句中所有所需要的信息。
 而当前运行语句所承载的栈顶元素就是 Running Execution Context。
-**Execution Context** 所可能含有的因素：
+**Execution Context** 所可能含有的因素：JavaScript 标准把一段代码（包括函数），执行所需的所有信息定义为：“执行上下文”。
 
 * **code evaluation state** 用于 async 和 generator 函数，保存了代码到哪的信息
 * **Function** 有 Function Execution Context 初始化所拥有的的
@@ -64,7 +64,9 @@ Execution Context Stack 里每一个所保存的东西 执行上下文(Execution
 * **VariableEnvironment** 用 var 声明变量声明到哪
 
 LexicalEnvironment 保存了 this、new.target、super、变量
-VariableEnvironment 是历史遗留包袱，仅仅由来处理 var 声明
+VariableEnvironment 是历史遗留包袱，仅仅用来处理 var 声明
+
+ps: JavaScript 函数的执行要复杂的多，需要处理 this、变量声明、with等等一系列的语法，所以词法环境只是 JavaScript 执行上下文中的一部分。
 
 **Environment Records** 
 
@@ -75,5 +77,15 @@ VariableEnvironment 是历史遗留包袱，仅仅由来处理 var 声明
 * **Object Environment Records** 由with产生
 
 **Function - Closure**
-闭包由两部分组成 **代码部分** 和 **环境部分**
-环境部分有 Object 和 变量序列 组成
+闭包由两部分组成 **表达式部分** 和 **环境部分**
+环境部分由 环境 和 标识符列表 组成
+
+在 JavaScript 标准中并没有 Closure 这个术语，但是我们不难从 Closure 的古典定义，在 JavaScript 中找到对应的闭包组成部分。
+环境部分：环境（函数的词法环境）、标识符列表（函数中用到未声明的变量）
+表达式部分：函数体
+
+实际上 JavaScript 中跟闭包对应的概念就是“函数”，可能是这个概念太过于普通，跟闭包看起来又没什么联系，所以大家才不自觉地把这个概念对应到了看起来更特别的“作用域”吧。
+
+
+
+

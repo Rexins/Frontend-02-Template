@@ -1,7 +1,18 @@
 
 ## 第二周笔记
 
-本周学习的是 JavaScript 的最小单元原子(Atom)其包含了字面量(Literal)、变量(Variable)、关键字(Keywords)、空白符(WhiteSpaces)、换行符(Line Terminator),单元间的组合对应了运行时的 类型(Types) 和造成了 Execution Context 的内存存储的变化。
+本周学习的是 JavaScript 的最小单元原子(Atom)其包含：
+* **WhiteSpaces** 空白符
+* **LineTerminator** 换行符
+* **Comment** 注释
+* **Token** 词
+  * **IdentifierName** 标识符名称，典型案例使我们使用的变量名字、关键词
+  * **Punctuator** 符号，我们使用运算符的符号
+  * **NumericLiteral** 数字直接量，就是我们写的数字
+  * **StringLiteral** 字符串直接量，就是我们使用单引号或者双引号引起来的直接量
+  * **Template** 字符串模板，用反引号括起来的直接量
+
+单元间的组合对应了运行时的 类型(Types) 和造成了 Execution Context 的内存存储的变化。
 
 Types（基本类型）
     Number、String、Boolean、Null、Undefined、Object、Symbol、Bigint
@@ -87,6 +98,10 @@ UTF-8 的编码规则很简单，只有二条：
   * 访问器属性(Accessor Property)
     * get(取属性值被调用)、set(设置属性值被调用)、enumerable、configurable
 
+
+“基于类”的编程提倡使用一个关注分类和类之间关系开发模型。在这类语言中，总是先有类，再从类去实例化一个对象。类与类之间又可能会形成继承、组合等关系。类又往往与语言的类型系统整合，形成一定编译时的能力。
+“基于原型”更为关注一系列对象实例的行为，而后才去关心如何将这些对象，划分到最近的使用方式相似的原型对象，而不是将它们分成类
+
 #### 描述面向对象的语法
 
 * {} . [] Object.defienProperty
@@ -101,9 +116,19 @@ UTF-8 的编码规则很简单，只有二条：
 * Object.prototype[[setPrototypeOf]]
 * ...
 
-#### 宿主对象
+#### 对象分类
+* 宿主对象（host Objects）：由 JavaScript 宿主环境提供对象，它们的行为完全由宿主环境提供。
+* 内置对象（Built-in Objects）：由 JavaScript 语言提供对象。
+  * 固有对象（Intrinsic Objects）：由标准规定，随着 JavaScript 运行时创建而自动创建的对象实例。
+  * 原生对象（Native Objects）：可以由用户通过 Array、RegExp 等内置构造器或者特殊语法创建的对象。
+  * 普通对象（Ordinary Objects）：由 {} 语法、Object 构造器或者 Class 关键字定义的类创建的对象，它能够被原型继承。
 
-    宿主对象由宿主环境提供
+#### 内置对象·原生对象
+我们把 JavaScript 中，能通过语言本身的构造器创建的对象称作原生对象。在 JavaScript 标准中，提供了 30 多个构造器，按不同的运用场景可以分为以下几类。
+![原生对象分类](./nativeObjctes.png)
+
+几乎所有原生对象构造器的能力都无法用纯 JavaScript 来实现，它们也无法用 class/extend 语法来继承。
+这些构造器本身对象多数使用了私有字段，而这些字段使得原型继承方法无法正常工作，所以，可以认为原生对象是为了特定能力或性能，而设计出来的“特权对象”。
 
 
 ### 标准/规范类型

@@ -22,8 +22,6 @@ function utf8_Encoding2(text) {
     return new Uint8Array(bytes)
 }
 
-
-
 function utf8_Encoding3(text) {
     const bytes = []
     for (let i = 0; i < text.length; i++) {
