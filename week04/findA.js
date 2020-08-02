@@ -1,34 +1,64 @@
-function findA(text) {
-    for (let i =0; i < text.length; i++) {
-        if (text.charAt(i) === 'a') {
-            return true;
-        }
+const EOF = Symbol('EOF')
+
+function start(c) {
+    if (c.charAt(0) === 'a') {
+        return foundA
+    } else {
+        return start
     }
-    return false;
 }
 
-function findAB(text) {
-    const len = text.length
-    if (len <= 2) {
-        return text === 'ab'
+function foundA(c) {
+    if (c.charAt(0) === 'b') {
+        return foundB
+    } else {
+        return start(c)
     }
-    for (let i = 0; i < len - 1; i++) {
-        if (text.charAt(i) + text.charAt(i+1) === 'ab') {
-            return true;
-        }
+}
+function foundB(c) {
+    if (c.charAt(0) === 'a') {
+        return foundA2
+    } else {
+        return start(c)
     }
-    return false;
+}
+function foundA2(c) {
+    if (c.charAt(0) === 'b') {
+        return foundB2
+    } else {
+        return start(c)
+    }
+}
+function foundB2(c) {
+    if (c.charAt(0) === 'a') {
+        return foundA3
+    } else {
+        return start(c)
+    }
+}
+function foundA3(c) {
+    if (c.charAt(0) === 'b') {
+        return foundB3
+    } else {
+        return start(c)
+    }
+}
+function foundB3(c) {
+    if (c.charAt(0) === 'x') {
+        return EOF
+    } else {
+        return foundB2(c)
+    }
 }
 
-function matchCharacter(text, matchText) {
-    let findNum = 0;
-    for (let v of text) {
-        if (v === matchText.charAt(findNum)) {
-            if (findNum === matchText.length - 1) return true;
-            findNum++
-        } else {
-            findNum = 0
-        }
+function match(text) {
+    let state = start
+
+    for (let c of text) {
+        state = state(c)
     }
-    return false
+    return state === EOF
 }
+
+
+console.log(match('ababababababx'))
