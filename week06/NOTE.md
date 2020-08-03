@@ -50,13 +50,30 @@
 * :nth-child
 * :nth-last-child
 * :first-child :last-child :only-child
+* of-type系列是 child 的系列的一个语法糖， S:nth-of-type(An+B) 是 :nth-child(|An+B| of S) 的另一种写法
 
 **逻辑形**
 * :not伪类
 * :where :has
 
 ps: nth-last-child/emtpy/last-child/only-child 其实是破坏了css comput 的回溯性质的，在其实现上是使用了一定的骇客手段做实现，因为实现方式的不同对性能应当会造成一定的影响，所以在可以的情况下使用符合设计初期的选择器进行定义样式。
-ps: 尽可能的定义多组className 去描述元素状态，少用复杂、伪类等选择器进行元素匹配，复杂的选择器最终会造成一定的性能方面的影响。
+ps: 尽可能的定义多组 className 去描述元素状态，少用复杂、伪类等选择器进行元素匹配，复杂的选择器最终会造成一定的性能方面的影响。
+
+**其他伪类选择器**
+* 国际
+  * dir
+  * lang
+* 音频/视频
+  * play
+  * pause
+* 时序
+  * current
+  * past
+  * future
+* 表格
+  * nth-col
+  * nth-last-col
+
 
 ### 伪元素
 

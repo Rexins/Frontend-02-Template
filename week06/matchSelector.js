@@ -5,8 +5,6 @@ function parseSelector(selectorParts) {
             class: '',
             id: ''
         }
-
-        if (selector.)
     })
 }
 
@@ -18,7 +16,5 @@ function match(selector, element) {
     while (element.parentNode) {
         elList.push(element.parentNode)
     }
-
-
 
 }
