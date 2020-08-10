@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img srcset="elva-fairy-320w.jpg 320w,
+                elva-fairy-480w.jpg 480w,
+                elva-fairy-800w.jpg 800w"
+        sizes="(max-width: 320px) 280px,
+                (max-width: 480px) 480px,
+                800px"
+        src="elva-fairy-800w.jpg" alt="Elva dressed as a fairy"/>
+
+  <picture>
+    <source sreset="image-wide-png" media="(min-width: 600px)">
+    <img src="elva-fairy-800w.jpg" />
+  </picture>
+
+  <video controls="controls">
+    <source src="movie.webm" type="video/webm">
+    <source src="movie.ogg" type="video/ogg">
+    <source src="movie.mp4" type="video/mp4">
+    You browser does not support video.
+  </video>
+
+  <audio controls>
+    <source src="song.mp3" type="audio/mpeg">
+    <source src="song.ogg" type="audio/ogg">
+    <p>You browser does not support audio.</p>
+  </audio>
+
+  <iframe sandbox srcdoc="<p>Yeah, you can see it <a href='/gallery?mode=cover&amp;amp;page=1'>in my gallery</a>."></iframe>
+</body>
+</html>
