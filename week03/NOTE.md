@@ -14,6 +14,8 @@
  UnBoxing（拆箱操作）对象类型转换为基础类型 ToPrimitive, 优先 调用 Symbol.toPrimitive的方法，没有该方法则根据场景调用 valueOf 或 toString
  Boxing（装箱操作）基础类型进行.运算符或者[]属性访问的时候，会直接根据基础类型的所属构造函数进行临时封装，然后调用读取属性
 
+ ![类型转换](./typeTransform.png '类型转换')
+
 ### Statement 语句
 
 Statement 中涉及的语法(Grammer)有 简单语句、复合语句，在运行时(Runtime)中有 Completion Record、Lexical Environment的概念
@@ -29,21 +31,30 @@ Completion Record 的 [[target]] label 是指语句前的标识符+: 中的标�
 
 **第四课总结 简单、复合语句**
 简单语句类型
-Expression(表达式语句)、Empty(空语句)、Debugger(调试语句)
-Throw(错误抛出)、Continue(跳过当前循环)、Break(退出语句)、Return（返回语句）这四个都是流程控制语句
+ExpressionStatement(表达式语句)、EmptyStatement(空语句)、DebuggerStatement(调试语句)
+ThrowStatement(错误抛出)、ContinueStatement(跳过当前循环)、BreakStatement(退出语句)、ReturnStatement(返回语句) 这四个都是流程控制语句
 
 复合语句类型
-Block、If、Switch、Iteration、With、Labbelled、Try
-Iteration 包含了 while/do while/for/for in/for of/for await of
+BlockStatement(块级语句)、IfStatement(结构语句 条件语句)、Switch(多分支结构 条件语句)、IterationStatement(循环语句)、WithStatement、LabbelledStatement、TryStatement(try/catch/finally 三层结构)
+IterationStatement 包含了 while/do while/for/for in/for of/for await of
 在 for 语句中会独立产生 let 独立的作用域，在let应用上。
 
 **第五课总结 声明**
-Funciton、Generator、AsyncFunction、AsyncGenerator、Variable、Class、LexicalDeclaration
+FuncitonDeclaration、GeneratorDeclaration、AsyncFunctionDeclaration、AsyncGeneratorDeclaration、VariableDeclaration、ClassDeclaration、LexicalDeclaration
 声明都有预处理机制(pre-process)
-其中 Function、Generator、AsyncFunction、AsyncGenerator、VariableDeclaration 都有声明提前的机制
-而 Class、LexicalDeclaration 择优声明前调用报错的机制
+其中 FunctionDeclaration、GeneratorDeclaration、AsyncFunctionDeclaration、AsyncGeneratorDeclaration、VariableDeclaration 都有声明提前的机制
+而 ClassDeclaration、LexicalDeclaration 择优声明前调用报错的机制
 
 **第六课总结 宏任务与微任务、事件循环**
+JS执行粒度（运行时）
+* 宏任务
+* 微任务（Promise）
+* 函数调用（Execution Context）
+* 语句/声明（Completion Record）
+* 表达式（Reference）
+* 直接量/变量/this ......
+
+
 宏任务与微任务采用的是 JSC 里边的一个说法。宏任务(Macrotask)是传给 JavaScript 引擎 执行的，微任务(micriotask)是 JavaScript 内部产生的(Promise)。
 
 事件循环(EventLoop)
