@@ -1,0 +1,112 @@
+<style>
+    .cell {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: goldenrod;
+        border: 1px solid #eee;
+        vertical-align: middle;
+
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+
+<div id="board"></div>
+
+<script>
+    let subNumber = 3
+    let pattern = []
+    let boradEl = document.getElementById('board')
+    let color = 1
+    Array(3).fill().forEach(() => pattern.push([...Array(3).fill(0)]))
+
+    function show() {
+        const fragment = document.createDocumentFragment()
+        for (let i = 0; i < subNumber; i++) {
+            for (let j = 0; j < subNumber; j++) {
+                let cell = document.createElement('div')
+                cell.classList.add('cell')
+                cell.innerText = pattern[i][j] === 2 ? '❎' :
+                    pattern[i][j] === 1 ? '✔️' : ''
+                cell.addEventListener('click', () => move(i, j))
+                fragment.appendChild(cell)
+            }
+            fragment.appendChild(document.createElement('br'))
+        }
+
+        boradEl.innerHTML = ''
+        boradEl.appendChild(fragment)
+    }
+
+    function move(x, y) {
+        pattern[x][y] = color
+        show()
+        if (check(pattern, color)) {
+            alert(color === 2 ? "❎ is winner!!" : "✔️ is winner!!")
+        }
+        color = 3 - color
+        if (willWin(pattern, color)) {
+            console.log(color === 2 ? "❎ is winner!!" : "✔️ is winner!!")
+        }
+    }
+
+    function check() {
+        for (let i = 0; i < subNumber; i++) {
+            let win = true
+            for (let j = 0; j < subNumber; j++) {
+                if (pattern[i][j] !== color)
+                    win = false
+            }
+            if (win)
+                return true
+        }
+        for (let i = 0; i < subNumber; i++) {
+            let win = true
+            for (let j = 0; j < subNumber; j++) {
+                if (pattern[j][i] !== color)
+                    win = false
+            }
+            if (win)
+                return true
+        }
+        {
+            let win = true
+            for (let i = 0; i < subNumber; i++) {
+                if (pattern[i][i] !== color)
+                    win = false
+            }
+            if (win)
+                return true
+        }
+        {
+            let win = true
+            for (let i = 0; i < subNumber; i++) {
+                if (pattern[i][subNumber - 1 - i] !== color)
+                    win = false
+            }
+            if (win)
+                return true
+        }
+    }
+
+    function clone(pattern) {
+        return JSON.parse(JSON.stringify(pattern))
+    }
+
+    function willWin(pattern, color) {
+        for (let i = 0; i < subNumber; i++) {
+            for (let j = 0; j <subNumber; j++) {
+                if (pattern[i][j])
+                    continue
+                let tmp = clone(pattern)
+                tmp[i][j] = color;
+                if (check(tmp, color))
+                    return true;
+            }
+        }
+    }
+    show()
+</script>
