@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/Array.js"
+            "program": "${workspaceFolder}/week11/KMP.js"
         }
     ]
 }
