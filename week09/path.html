@@ -109,6 +109,7 @@
             await sleep(30)
             map[y * 100 + x] = 2;
             container.children[y*100 +x].style.backgroundColor = 'lightgreen'
+            
             queue.give([x, y])
         }
 

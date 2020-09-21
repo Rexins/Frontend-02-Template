@@ -1,0 +1,57 @@
+<script>
+
+function find(source, pattern) {
+    // *的数量
+    let starCount = 0;
+    for (let i of pattern) {
+        if (i === '*')
+            starCount++
+    }
+    // 边界处理
+    if (starCount === 0) {
+        for (let i = 0; i < pattern.length; i++) {
+            if (source[i] !== pattern[i] || pattern[i] === '?')
+                return false
+        }
+        return
+    }
+
+    // 查找第一个 * 号
+    let i = 0;
+    let lastIndex = 0;
+
+    for (i = 0; pattern[i] !== '*'; i++) {
+        if (pattern[i] !== source[i] || pattern[i] === '?')
+            return false
+    }
+
+    lastIndex = i;
+    // 处理 除了 最后一个*号逻辑
+    for (let p = 0; p < starCount - 1; p++) {
+        i++
+        let subPattern = ''
+        while(pattern[i] !== '*') {
+            subPattern += pattern[i]
+            i++
+        }
+
+        let reg = new RegExp(subPattern.replace(/\?/g, "[\\s\\S]"), "g")
+        reg.lastIndex = lastIndex
+
+        // console.log(reg.exec(source))
+
+        if (!reg.exec(source))
+            return false
+        lastIndex = reg.lastIndex
+    }
+
+    // 处理最后一个星号逻辑
+    for (let j = 0; j <= source.length - lastIndex && pattern[pattern.length - j] !== '*'; j++) {
+        if (pattern[pattern.length - j] !== source[source.length - j] && pattern[pattern.length - j] !== '?')
+            return false
+    }
+
+    return true
+}
+
+</script>
