@@ -47,6 +47,7 @@ FuncitonDeclaration、GeneratorDeclaration、AsyncFunctionDeclaration、AsyncGen
 
 **第六课总结 宏任务与微任务、事件循环**
 JS执行粒度（运行时）
+
 * 宏任务
 * 微任务（Promise）
 * 函数调用（Execution Context）
@@ -55,10 +56,10 @@ JS执行粒度（运行时）
 * 直接量/变量/this ......
 
 
-宏任务与微任务采用的是 JSC 里边的一个说法。宏任务(Macrotask)是传给 JavaScript 引擎 执行的，微任务(micriotask)是 JavaScript 内部产生的(Promise)。
+宏任务与微任务采用的是 JSC 里边的一个说法。宏任务(Macrotask)是传给 JavaScript 引擎 执行的，微任务(micriotask)是 JavaScript 内部产生的(目前只有 Promise)。
 
 事件循环(EventLoop)
-getCode => execute => wait => getCode ...
+getCode(获取代码) => execute(执行) => wait(等待) => getCode ...
 
 **第七课总结 函数调用**
 宏任务与微任务会决定我们代码的执行顺序，在同一个任务里还会有函数调用导致任务来来回回的执行，主要是涉及的执行上下文栈(Execution Context Stack)。

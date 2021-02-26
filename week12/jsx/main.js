@@ -1,19 +1,21 @@
-import { createElement } from './framework'
-import { Carousel } from './carousel'
-import { Timeline, Animation } from './animation'
+import { createElement } from "./framework";
+import { Carousel } from "./carousel";
+import { Timeline, Animation } from "./animation";
 
 let d = [
-  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2478654573,3194210932&fm=26&gp=0.jpg",
-  "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2129630671,1306849630&fm=26&gp=0.jpg",
-  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2472778272,631440411&fm=26&gp=0.jpg",
-  "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1189426794,1991844916&fm=26&gp=0.jpg"
-]
+  "https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg",
+  "https://static001.geekbang.org/resource/image/1b/21/1b809d9a2bdf3ecc481322d7c9223c21.jpg",
+  "https://static001.geekbang.org/resource/image/b6/4f/b6d65b2f12646a9fd6b8cb2b020d754f.jpg",
+  "https://static001.geekbang.org/resource/image/73/e4/730ea9c393def7975deceb48b3eb6fe4.jpg",
+];
 
-let a = <Carousel src={d} />
+let a = <Carousel src={d} />;
 
-const line = new Timeline()
-line.add(new Animation({}, 'a', 100, 300, 1000, null), Date.now() + 2000)
+const line = new Timeline();
+window.Abnimation = Animation;
+window.lineE = line;
+line.add(new Animation({}, "a", 100, 300, 1000, null), Date.now() + 2000);
 
-line.start()
+line.start();
 
-a.mountTo(document.body)
+a.mountTo(document.body);

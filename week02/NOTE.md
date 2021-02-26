@@ -2,6 +2,17 @@
 ## 第二周笔记
 
 本周学习的是 JavaScript 的最小单元原子(Atom)其包含：
+
+* Gammar
+  * Literal
+  * Variable
+  * KeyWords
+  * WhiteSpace
+  * Line Terminator
+* Runtime
+  * Types
+  * Execution Context
+
 * **WhiteSpaces** 空白符
 * **LineTerminator** 换行符
 * **Comment** 注释
@@ -23,8 +34,8 @@ Types（基本类型）
     IEEE 754中，规定了四种表示浮点数值的方式：单精确度(32位)、双精确度(64位)、延伸单精确度、延伸双精确度。像 ECMAScript 采用的是 双精确度，也就是说，会用 64 位字节来存储一个浮点数。
     IEEE 754 Double Float 表示为 Sign(1) + Exponent(11) + Fraction(52) 64Bit
     Sign 表示 正负，0 表示为正 1 表示为负
-    Exponent 表示指数位，它会有个偏移，比 1e10 大的表示为正数反之为负数。
-    Fraction 有个隐藏位 表为 1 最小值。
+    Exponent 表示指数位，它会有个偏移，比 1e10 大的表示为正数反之为负数。所以 它有个基准值 10e10
+    Fraction 表示精度位，它有个隐藏位 表为 1 最小值。
 
 * Grammar
   * DecimalLiteral（十进制）0、0.、.2、1e3
@@ -107,10 +118,10 @@ ps：基于原型的理解里要抛出 new 的概念，new 的产生是语言设
 
 #### 描述面向对象的语法
 
-* {} . [] Object.defienProperty
-* Object.create / Object.setPrototypeOf / Object.getPrototypeOf
-* new / class / extends
-* new / function / prototype
+* {} . [] Object.defienProperty  基础
+* Object.create / Object.setPrototypeOf / Object.getPrototypeOf   基于原型
+* new / class / extends       基于类
+* new / function / prototype  es3
 
 #### 特殊对象
 
@@ -120,6 +131,7 @@ ps：基于原型的理解里要抛出 new 的概念，new 的产生是语言设
 * ...
 
 #### 对象分类
+
 * 宿主对象（host Objects）：由 JavaScript 宿主环境提供对象，它们的行为完全由宿主环境提供。
 * 内置对象（Built-in Objects）：由 JavaScript 语言提供对象。
   * 固有对象（Intrinsic Objects）：由标准规定，随着 JavaScript 运行时创建而自动创建的对象实例。
@@ -135,6 +147,7 @@ ps：基于原型的理解里要抛出 new 的概念，new 的产生是语言设
 
 
 ### 标准/规范类型
+
 * **List 和 Record**：用于描述函数传参过程。
 * **Set**：主要用于解释字符集等。
 * **Completion Record**：用于描述异常、跳出等语句执行过程。

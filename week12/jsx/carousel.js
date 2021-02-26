@@ -1,58 +1,63 @@
-import { Component } from './framework'
+import { Component } from "./framework";
 export class Carousel extends Component {
   constructor() {
-    super()
-    this.attributes = Object.create(null)
+    super();
+    this.attributes = Object.create(null);
   }
   setAttribute(name, value) {
-    this.attributes[name] = value
+    this.attributes[name] = value;
   }
   render() {
-    this.root = document.createElement("div")
-    this.root.classList.add("carousel")
+    this.root = document.createElement("div");
+    this.root.classList.add("carousel");
     for (let record of this.attributes.src) {
-      let child = document.createElement('div')
-      child.style.backgroundImage = `url(${record})`
-      this.root.appendChild(child)
+      let child = document.createElement("div");
+      child.style.backgroundImage = `url(${record})`;
+      this.root.appendChild(child);
     }
 
     let position = 0;
 
-    this.root.addEventListener('mousedown', event => {
-      let children = this.root.children
-      let rectWidth = this.root.children[0]?.getBoundingClientRect().width
+    this.root.addEventListener("mousedown", (event) => {
+      let children = this.root.children;
+      let rectWidth = this.root.children[0]?.getBoundingClientRect().width;
 
-      let startX = event.clientX
+      let startX = event.clientX;
 
-      let move = event => {
-        let x = event.clientX - startX
+      let move = (event) => {
+        let x = event.clientX - startX;
 
-        let current = position - Math.round((x - x % 500) / 500)
+        let current = position - Math.round((x - (x % 500)) / 500);
         for (let offset of [-1, 0, 1]) {
-          let pos = current + offset
-          pos = (pos + children.length) % children.length
-          children[pos].style.transition = "none"
-          children[pos].style.transform = `translateX(${- pos * rectWidth + offset * rectWidth + x % rectWidth}px)`
+          let pos = current + offset;
+          pos = (pos + children.length) % children.length;
+          children[pos].style.transition = "none";
+          children[pos].style.transform = `translateX(${
+            -pos * rectWidth + offset * rectWidth + (x % rectWidth)
+          }px)`;
         }
-      }
+      };
 
-      let up = event => {
-        let x = event.clientX - startX
-        position = position - Math.round(x / 500)
-        for (let offset of [0, -(Math.sign(Math.round(x / 500) - x + rectWidth / 2 * Math.sign(x) ))]) {
-          let pos = position + offset
-          pos = (pos + children.length) % children.length
-          console.log(pos)
-          children[pos].style.transition = ""
-          children[pos].style.transform = `translateX(${- pos * rectWidth + offset * rectWidth}px)`
+      let up = (event) => {
+        let x = event.clientX - startX;
+        position = position - Math.round(x / 500);
+        for (let offset of [
+          0,
+          -Math.sign(Math.round(x / 500) - x + (rectWidth / 2) * Math.sign(x)),
+        ]) {
+          let pos = position + offset;
+          pos = (pos + children.length) % children.length;
+          children[pos].style.transition = "";
+          children[pos].style.transform = `translateX(${
+            -pos * rectWidth + offset * rectWidth
+          }px)`;
         }
-        document.removeEventListener('mousemove', move)
-        document.removeEventListener('mouseup', up)
-      }
-      document.addEventListener('mousemove', move)
-      document.addEventListener('mouseup', up)
-    })
-
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+      };
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", up);
+    });
 
     // let currentIndex = 0;
     // setInterval(() => {
@@ -73,9 +78,9 @@ export class Carousel extends Component {
     //     currentIndex = nextIndex
     //   }, 16)
     // }, 3000);
-    return this.root
+    return this.root;
   }
   mountTo(parent) {
-    parent.appendChild(this.render())
+    parent.appendChild(this.render());
   }
 }
